@@ -4,11 +4,18 @@ import styled from 'styled-components';
 import shoppingBasket from '../images/shopping-basket.png';
 import Basket from './Basket';
 
+
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 16px 16px 0 0;
   position: relative;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    justify-content: center
+    }
+
 `
 const Button = styled.button`
   background-color: var(--lightYellow);
@@ -34,11 +41,16 @@ const BasketList = styled.ul`
   border-radius: 4px;
   list-style-type: none;
 
+  @media (max-width: 480px) {
+    justify-content: space-between;
+    width: auto;
+    }
+
   li {
     margin-bottom: 2px;
     text-align: left;
 
-    &:last-of-type {
+    &.total {
       border-top: 1px dashed var(--deepPurple);
       padding: 10px 0 0;
       margin: 20px 0 0 ;
@@ -50,7 +62,7 @@ const BasketList = styled.ul`
 
 export default function BasketItems() {
   //pass in context props
-  const {basket, setBasket} = useProduct();
+  const {basket, setBasket} = useProduct([]);
   const [showBasket, setShowBasket] = useState(false)
   
   //runs once at the beginning to fetch the previusly created basket items
@@ -61,6 +73,12 @@ export default function BasketItems() {
       setBasket(JSON.parse(basketItems))
     }
   },[])
+
+  // const handleClearBasket = () => {
+  //   const emptyBasket = localStorage.setItem('basket', '');
+  //   setBasket(emptyBasket);
+  //   return;
+  // }
 
   const itemAmount = basket.map(currentBasket => currentBasket.map(item => Number(item.amount)));
   const basketAmount = itemAmount.map(amount => amount.reduce((acc, cur) => acc + cur, 0));
@@ -76,7 +94,8 @@ export default function BasketItems() {
         {showBasket &&
           <BasketList>
             {basket.map((currentBasket) => currentBasket.map((basketItem) => <Basket basket={basketItem} key={basketItem.id}/>))}
-            <li>Total: ${basketTotal}</li>
+            <li className='clearBasket'><button>Clear Basket</button></li>
+            <li className='total'>Total: ${basketTotal}</li>
           </BasketList>
          }
     </ButtonWrapper>

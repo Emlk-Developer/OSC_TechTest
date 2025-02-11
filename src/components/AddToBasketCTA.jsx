@@ -37,7 +37,7 @@ export default function AddToBasketCTA(id, quantity, title, amount, currency) {
   return (
     <>
       <Button onClick={() => handleAddToBasket(id,quantity, title, amount, currency)}>Add to basket</Button>
-      <Notification notification={notification} onChange={setNotification}/>
+      <Notification notification={notification} onChange={setNotification} message={'Product Added to Basket'}/>
     </>
   )
 }

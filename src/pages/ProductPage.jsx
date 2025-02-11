@@ -12,6 +12,10 @@ const ProductSection = styled.section`
   gap: 15px;
   padding: 10px;
 
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+
   img {
     width: 100%;
   }
