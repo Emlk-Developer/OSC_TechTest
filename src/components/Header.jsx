@@ -3,15 +3,16 @@ import styled from 'styled-components';
 import BasketItems from './BasketItems';
 
 const HeaderTag = styled.header`
-display: flex;
-justify-content: space-between;
-padding: 20px;
-position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
+  gap: 20px;
 
-@media (max-width: 480px) {
-  flex-direction: column;
-  align-items: center;
-    }
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 const HeaderTitle = styled.div`
   display: flex;
@@ -56,6 +57,7 @@ export default function Header() {
         <HeaderNav>
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/products'>Products</Link></li>
+                <li><Link to='/cart'>Basket</Link></li>
         </HeaderNav>
       </nav> 
       <BasketItems />

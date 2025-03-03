@@ -5,6 +5,7 @@ const ProductContext = createContext();
 // eslint-disable-next-line react/prop-types
 function ProductProvider({ children }) {
     const [basket, setBasket] = useState([])
+    const [notification, setNotification] = useState({status:false, message: ''});
     const formatCurrencyCode = {
       "CAD" : "$",
       "GBP" : "£",
@@ -16,7 +17,12 @@ function ProductProvider({ children }) {
 
 
     return (
-      <ProductContext.Provider value={{basket, setBasket, getformatCurrencyCode}}>
+      <ProductContext.Provider value={{
+          basket, setBasket, 
+          notification, setNotification,
+          getformatCurrencyCode
+        }}
+      >
           {children}
       </ProductContext.Provider>
     )

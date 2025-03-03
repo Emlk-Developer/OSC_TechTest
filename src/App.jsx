@@ -7,6 +7,7 @@ import { loader } from "./pages/ProductPage";
 import { ProductProvider } from "./contexts/contexts";
 import AppLayout from "./ui/AppLayout";
 import HomePage from "./pages/HomePage";
+import CartPage from "./pages/CartPage";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         path: '/products/:id',
         element: <Product />,
         loader: loader
+      },
+      {
+        path:'/cart',
+        element:<CartPage />
       },
     ]
   }

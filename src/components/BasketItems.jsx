@@ -41,6 +41,12 @@ const BasketList = styled.ul`
   border-radius: 4px;
   list-style-type: none;
 
+  .clear-basket {
+    margin: 20px 0 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   @media (max-width: 480px) {
     justify-content: space-between;
     width: auto;
@@ -74,15 +80,13 @@ export default function BasketItems() {
     }
   },[])
 
-  // const handleClearBasket = () => {
-  //   const emptyBasket = localStorage.setItem('basket', '');
-  //   setBasket(emptyBasket);
-  //   return;
-  // }
+  const handleClearBasket = () => {
+    const emptyBasket = [];
+    setBasket(emptyBasket);
+    return;
+  }
 
-  const itemAmount = basket.map(currentBasket => currentBasket.map(item => Number(item.amount)));
-  const basketAmount = itemAmount.map(amount => amount.reduce((acc, cur) => acc + cur, 0));
-  const basketTotal = basketAmount.reduce((acc, cur) => acc + cur, 0);
+  const itemAmount = basket.map(item => Number(item.amount)).reduce((acc, cur) => acc + cur, 0);
 
   return (
     <ButtonWrapper>
@@ -93,9 +97,9 @@ export default function BasketItems() {
         {/* when showBasket is true, show basket */}
         {showBasket &&
           <BasketList>
-            {basket.map((currentBasket) => currentBasket.map((basketItem) => <Basket basket={basketItem} key={basketItem.id}/>))}
-            <li className='clearBasket'><button>Clear Basket</button></li>
-            <li className='total'>Total: ${basketTotal}</li>
+            {basket.map(((basketItem) => <Basket basket={basketItem} key={basketItem.id}/>))}
+            <li className='clear-basket'><Button onClick={handleClearBasket}>Clear Basket</Button></li>
+            <li className='total'>Total: ${itemAmount}</li>
           </BasketList>
          }
     </ButtonWrapper>

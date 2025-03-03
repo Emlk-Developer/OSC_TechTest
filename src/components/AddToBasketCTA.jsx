@@ -19,25 +19,35 @@ const Button = styled.button`
 `
 
 export default function AddToBasketCTA(id, quantity, title, amount, currency) {
-  const {basket, setBasket} = useProduct();
-  const [notification, setNotification] = useState(false);
+  const {basket, setBasket, notification, setNotification} = useProduct();
 
-      const handleAddToBasket = ({id, quantity, title, amount, currency}) => {
-          const addedProduct = [{id, title, amount, quantity, currency}]
-          const newBasket = [...basket, addedProduct]
-          /*initally tried to post the item to the mock shop api creat cart*/
-          //postToCart(quantity, id);
-          setBasket(newBasket);
-          setNotification(true);
-          //update localStorage with the new basket information
-          localStorage.setItem('basket', JSON.stringify(newBasket));
-          return;
+
+  const handleAddToBasket = ({id, quantity, title, amount, currency}) => {
+    //first check if id already exists
+    const newItemId = id;
+    const currentBasket = basket.filter((item) => item.id === newItemId);
+    let notificationStatus;
+      if (currentBasket.length) {
+        notificationStatus = {status: true, message:'Product Already in Basket'}
+        setNotification(notificationStatus);
+        return;
       }
+    const addedProduct = {id, title, amount, quantity, currency};
+    const newBasket = [...basket, addedProduct]
+    notificationStatus = {status: true, message:'Product Added to Basket'}
+    setBasket(newBasket);
+    setNotification(notificationStatus);
+    //update localStorage with the new basket information
+    localStorage.setItem('basket', JSON.stringify(newBasket));
+    return;
+  }
       
   return (
     <>
       <Button onClick={() => handleAddToBasket(id,quantity, title, amount, currency)}>Add to basket</Button>
-      <Notification notification={notification} onChange={setNotification} message={'Product Added to Basket'}/>
+      {notification &&
+      <Notification notification={notification.status} onChange={setNotification} message={notification.message}/>
+      }
     </>
   )
 }
