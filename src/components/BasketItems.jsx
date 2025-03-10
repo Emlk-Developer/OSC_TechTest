@@ -79,6 +79,7 @@ export default function BasketItems() {
       setBasket(JSON.parse(basketItems))
     }
   },[])
+  
 
   const handleClearBasket = () => {
     const emptyBasket = [];

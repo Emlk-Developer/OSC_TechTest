@@ -1,9 +1,19 @@
-import {createContext, useState, useContext} from "react";
-
+import {createContext, useState, useContext, useEffect} from "react";
+import { getData } from "../services/apiMockShopData";
 const ProductContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 function ProductProvider({ children }) {
+  useEffect( () => {
+        
+    const supermarketData = async() => {
+        const data = await getData()
+        setShopproducts(data)
+    }
+    supermarketData()
+},[])
+
+    const [shopProducts, setShopproducts] = useState();
     const [basket, setBasket] = useState([])
     const [notification, setNotification] = useState({status:false, message: ''});
     const formatCurrencyCode = {
@@ -20,7 +30,8 @@ function ProductProvider({ children }) {
       <ProductContext.Provider value={{
           basket, setBasket, 
           notification, setNotification,
-          getformatCurrencyCode
+          getformatCurrencyCode,
+          shopProducts
         }}
       >
           {children}

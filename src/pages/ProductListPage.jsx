@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { getData } from "../services/apiMockShopData";
+
 import ProductCard from "../components/ProductCard";
 import styled from 'styled-components';
+import { useProduct } from "../contexts/contexts";
 
     const ProductListList = styled.ul`
         display: grid;
@@ -18,17 +19,9 @@ import styled from 'styled-components';
     `
 
 export default function ProductListPage() {
+    const {shopProducts} = useProduct()
 
-    useEffect( () => {
-        
-        const supermarketData = async() => {
-            const data = await getData()
-            setShopproducts(data)
-        }
-        supermarketData()
-    },[])
-    
-        const [shopProducts, setShopproducts] = useState();
+
   return (
     <section>
         <h2>Our Available Products</h2>

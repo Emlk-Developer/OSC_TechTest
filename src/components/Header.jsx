@@ -50,7 +50,7 @@ export default function Header() {
     <HeaderTag>
       <HeaderTitle>
         <Link to='/'>
-          <h1>Mock Shop</h1>
+          <h1>The Mock Shop</h1>
         </Link>
       </HeaderTitle>
       <nav>

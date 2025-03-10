@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
 :root{
   --green: #008130;
   --yellow: #fcbc00;
@@ -22,6 +24,16 @@ code {
     monospace;
 }
 
+
+@layer base {
+  html {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+}
+
 .homepage {
   display: flex;
   flex-direction: column;
@@ -35,6 +47,11 @@ code {
     width: 100%;
     max-width: 500px;
   }
+}
+
+.swiper-pagination {
+  position: relative;
+  padding: 40px 0 0 ;
 }
 
 #overlay {

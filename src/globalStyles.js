@@ -2,11 +2,19 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   a {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     color: var(--deepBlue);
     text-decoration: none;
   }
+
+  p {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+
+  }
+
   h1 {
     text-transform: uppercase;
     color: var(--deepPurple);
